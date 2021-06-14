@@ -19,7 +19,7 @@ SOC芯片中绝大部分功能模块都有寄存器,处理器通过对寄存器�
 ![gen_file](https://raw.githubusercontent.com/wudayemen/gen_apb_file/main/gen_file.PNG)
 
 ## 描述
-gen_apb_file为一种开源的寄存器文件解决方案,包括中心化的寄存器描述文件(Excel格式)和相应的寄存器文件生成脚本,能够快速生成寄存器硬件模块、ralf模型、c语言头文件。主要有以下特性:
+gen_apb_file是一种开源的寄存器文件解决方案,包括中心化的寄存器描述文件(Excel格式)和相应的寄存器文件生成脚本,能够快速生成寄存器硬件模块、ralf模型、c语言头文件。主要有以下特性:
 
 - 支持APB接口类型
 - 寄存器位宽可配
@@ -69,6 +69,12 @@ gen_apb_file为一种开源的寄存器文件解决方案,包括中心化的寄�
 
 ## 用法
 - `python gen_apb_file.py template.xls`
+注：
+1. 工作簿template.xls中的名称template不会体现在生成文件中，你可以将它改成任何名称如芯片名称。
+2. 工作表<sheet_name>名称tmplmd，xuartlite[<sup>[3]</sup>](#refer-anchor-3)为功能模块的名称,运行脚本会根据每一个工作表生成<sheet_name>_apb_cfg.v、<sheet_name>.h,<sheet_name>.ralf
+
+![sheet_name](https://raw.githubusercontent.com/wudayemen/gen_apb_file/main/sheet_name.png)
+
 
 ## 维护者
 [@wudayemen](https://www.cnblogs.com/wudayemen/)
@@ -79,6 +85,9 @@ gen_apb_file为一种开源的寄存器文件解决方案,包括中心化的寄�
 [1] [参考路科验证文章](http://blog.eetop.cn/blog-1561828-6266218.html)
 <div id="refer-anchor-2"></div>
 [2] [参考 &laquoUVM实战&raquo p512]
+<div id="refer-anchor-3"></div>
+[3] [参考Xilinx Uartlite](https://www.xilinx.com/support/documentation/ip_documentation/axi_uartlite/v2_0/pg142-axi-uartlite.pdf)
+
 
 ## 许可证
 The gen_apb_file.py is using the LGPL license. That's for the formalities. But there are some practical statements implied by those licenses:
@@ -92,5 +101,5 @@ Your freedoms are:
 
 Your obligations (and my wish) are:
 
-- f you modify the gen_apb_file.py , please, share your improvements.
+- if you modify the gen_apb_file.py , please, share your improvements.
 Also, gen_apb_file is provided "as is", without warranty of any kind.
