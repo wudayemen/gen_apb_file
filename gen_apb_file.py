@@ -5,6 +5,7 @@ import xlrd
 import re
 import os
 import sys
+import math
 
 # ==========================================================
 #  func process excel                              start#{{{
@@ -231,19 +232,19 @@ def gen_reg_hdl(p_sheet,ModuleName):
             if(fld_type in w1c_list):
                 fo.write("\n"+16*" "+",%s_%s_clr"%(fld_name,fld_type.lower()))
                 fo.write("\n"+16*" "+",%s_%s_clr_val"%(fld_name,fld_type.lower()))
-            elif(fld_type in w0c_list):
+            if(fld_type in w0c_list):
                 fo.write("\n"+16*" "+",%s_%s_clr"%(fld_name,fld_type.lower()))
                 fo.write("\n"+16*" "+",%s_%s_clr_val"%(fld_name,fld_type.lower()))
-            elif(fld_type in w1s_list):
+            if(fld_type in w1s_list):
                 fo.write("\n"+16*" "+",%s_%s_set"%(fld_name,fld_type.lower()))
                 fo.write("\n"+16*" "+",%s_%s_set_val"%(fld_name,fld_type.lower()))
-            elif(fld_type in w0s_list):
+            if(fld_type in w0s_list):
                 fo.write("\n"+16*" "+",%s_%s_set"%(fld_name,fld_type.lower()))
                 fo.write("\n"+16*" "+",%s_%s_set_val"%(fld_name,fld_type.lower()))
-            elif(fld_type in w1t_list):
+            if(fld_type in w1t_list):
                 fo.write("\n"+16*" "+",%s_%s_tog"%(fld_name,fld_type.lower()))
                 fo.write("\n"+16*" "+",%s_%s_tog_val"%(fld_name,fld_type.lower()))
-            elif(fld_type in w0t_list):
+            if(fld_type in w0t_list):
                 fo.write("\n"+16*" "+",%s_%s_tog"%(fld_name,fld_type.lower()))
                 fo.write("\n"+16*" "+",%s_%s_tog_val"%(fld_name,fld_type.lower()))
 
@@ -251,13 +252,13 @@ def gen_reg_hdl(p_sheet,ModuleName):
             if(fld_type in wc_list):
                 fo.write("\n"+16*" "+",%s_%s_clr"%(fld_name,fld_type.lower()))
                 fo.write("\n"+16*" "+",%s_%s_clr_val"%(fld_name,fld_type.lower()))
-            elif(fld_type in rc_list and fld_type != 'WRC'):
+            if(fld_type in rc_list and fld_type != 'WRC'):
                 fo.write("\n"+16*" "+",%s_%s_clr"%(fld_name,fld_type.lower()))
                 fo.write("\n"+16*" "+",%s_%s_clr_val"%(fld_name,fld_type.lower()))
-            elif(fld_type in ws_list):
+            if(fld_type in ws_list):
                 fo.write("\n"+16*" "+",%s_%s_set"%(fld_name,fld_type.lower()))
                 fo.write("\n"+16*" "+",%s_%s_set_val"%(fld_name,fld_type.lower()))
-            elif(fld_type in rs_list and fld_type != 'WRS'):
+            if(fld_type in rs_list and fld_type != 'WRS'):
                 fo.write("\n"+16*" "+",%s_%s_set"%(fld_name,fld_type.lower()))
                 fo.write("\n"+16*" "+",%s_%s_set_val"%(fld_name,fld_type.lower()))
     fo.write("\n"+16*" "+");")
@@ -286,32 +287,32 @@ def gen_reg_hdl(p_sheet,ModuleName):
             if(fld_type in w1c_list):
                 fo.write("output %-9s%s_%s_clr;\n"%('',fld_name,fld_type.lower()))
                 fo.write("output %-9s%s_%s_clr_val;\n"%(bus_width(bit),fld_name,fld_type.lower()))
-            elif(fld_type in w0c_list):
+            if(fld_type in w0c_list):
                 fo.write("output %-9s%s_%s_clr;\n"%('',fld_name,fld_type.lower()))
                 fo.write("output %-9s%s_%s_clr_val;\n"%(bus_width(bit),fld_name,fld_type.lower()))
-            elif(fld_type in w1s_list):
+            if(fld_type in w1s_list):
                 fo.write("output %-9s%s_%s_set;\n"%('',fld_name,fld_type.lower()))
                 fo.write("output %-9s%s_%s_set_val;\n"%(bus_width(bit),fld_name,fld_type.lower()))
-            elif(fld_type in w0s_list):
+            if(fld_type in w0s_list):
                 fo.write("output %-9s%s_%s_set;\n"%('',fld_name,fld_type.lower()))
                 fo.write("output %-9s%s_%s_set_val;\n"%(bus_width(bit),fld_name,fld_type.lower()))
-            elif(fld_type in w1t_list):
+            if(fld_type in w1t_list):
                 fo.write("output %-9s%s_%s_tog;\n"%('',fld_name,fld_type.lower()))
                 fo.write("output %-9s%s_%s_tog_val;\n"%(bus_width(bit),fld_name,fld_type.lower()))
-            elif(fld_type in w0t_list):
+            if(fld_type in w0t_list):
                 fo.write("output %-9s%s_%s_tog;\n"%('',fld_name,fld_type.lower()))
                 fo.write("output %-9s%s_%s_tog_val;\n"%(bus_width(bit),fld_name,fld_type.lower()))
             
             if(fld_type in wc_list):
                 fo.write("output %-9s%s_%s_clr;\n"%('',fld_name,fld_type.lower()))
                 fo.write("output %-9s%s_%s_clr_val;\n"%(bus_width(bit),fld_name,fld_type.lower()))
-            elif(fld_type in rc_list and fld_type != 'WRC'):
+            if(fld_type in rc_list and fld_type != 'WRC'):
                 fo.write("output %-9s%s_%s_clr;\n"%('',fld_name,fld_type.lower()))
                 fo.write("output %-9s%s_%s_clr_val;\n"%(bus_width(bit),fld_name,fld_type.lower()))
-            elif(fld_type in ws_list):
+            if(fld_type in ws_list):
                 fo.write("output %-9s%s_%s_set;\n"%('',fld_name,fld_type.lower()))
                 fo.write("output %-9s%s_%s_set_val;\n"%(bus_width(bit),fld_name,fld_type.lower()))
-            elif(fld_type in rs_list and fld_type != 'WRS'):
+            if(fld_type in rs_list and fld_type != 'WRS'):
                 fo.write("output %-9s%s_%s_set;\n"%('',fld_name,fld_type.lower()))
                 fo.write("output %-9s%s_%s_set_val;\n"%(bus_width(bit),fld_name,fld_type.lower()))
 
@@ -338,32 +339,32 @@ def gen_reg_hdl(p_sheet,ModuleName):
             if(fld_type in w1c_list):
                 fo.write("wire %-11s%s_%s_clr;\n"%('',fld_name,fld_type.lower()))
                 fo.write("wire %-11s%s_%s_clr_val;\n"%(bus_width(bit),fld_name,fld_type.lower()))
-            elif(fld_type in w0c_list):
+            if(fld_type in w0c_list):
                 fo.write("wire %-11s%s_%s_clr;\n"%('',fld_name,fld_type.lower()))
                 fo.write("wire %-11s%s_%s_clr_val;\n"%(bus_width(bit),fld_name,fld_type.lower()))
-            elif(fld_type in w1s_list):
+            if(fld_type in w1s_list):
                 fo.write("wire %-11s%s_%s_set;\n"%('',fld_name,fld_type.lower()))
                 fo.write("wire %-11s%s_%s_set_val;\n"%(bus_width(bit),fld_name,fld_type.lower()))
-            elif(fld_type in w0s_list):
+            if(fld_type in w0s_list):
                 fo.write("wire %-11s%s_%s_set;\n"%('',fld_name,fld_type.lower()))
                 fo.write("wire %-11s%s_%s_set_val;\n"%(bus_width(bit),fld_name,fld_type.lower()))
-            elif(fld_type in w1t_list):
+            if(fld_type in w1t_list):
                 fo.write("wire %-11s%s_%s_tog;\n"%('',fld_name,fld_type.lower()))
                 fo.write("wire %-11s%s_%s_tog_val;\n"%(bus_width(bit),fld_name,fld_type.lower()))
-            elif(fld_type in w0t_list):
+            if(fld_type in w0t_list):
                 fo.write("wire %-11s%s_%s_tog;\n"%('',fld_name,fld_type.lower()))
                 fo.write("wire %-11s%s_%s_tog_val;\n"%(bus_width(bit),fld_name,fld_type.lower()))
             
             if(fld_type in wc_list):
                 fo.write("wire %-11s%s_%s_clr;\n"%('',fld_name,fld_type.lower()))
                 fo.write("wire %-11s%s_%s_clr_val;\n"%(bus_width(bit),fld_name,fld_type.lower()))
-            elif(fld_type in rc_list):
+            if(fld_type in rc_list):
                 fo.write("wire %-11s%s_%s_clr;\n"%('',fld_name,fld_type.lower()))
                 fo.write("wire %-11s%s_%s_clr_val;\n"%(bus_width(bit),fld_name,fld_type.lower()))
-            elif(fld_type in ws_list):
+            if(fld_type in ws_list):
                 fo.write("wire %-11s%s_%s_set;\n"%('',fld_name,fld_type.lower()))
                 fo.write("wire %-11s%s_%s_set_val;\n"%(bus_width(bit),fld_name,fld_type.lower()))
-            elif(fld_type in rs_list):
+            if(fld_type in rs_list):
                 fo.write("wire %-11s%s_%s_set;\n"%('',fld_name,fld_type.lower()))
                 fo.write("wire %-11s%s_%s_set_val;\n"%(bus_width(bit),fld_name,fld_type.lower()))
     
@@ -430,34 +431,34 @@ def gen_reg_hdl(p_sheet,ModuleName):
             if(fld_type in w1c_list):
                 fo.write("assign %s_%s_clr = %s_wr;\n"%(fld_name,fld_type.lower(),reg_name.lower()))
                 fo.write("assign %s_%s_clr_val%s =%s%s &(~pwdata%s);\n"%(fld_name,fld_type.lower(),bus_width(bit),fld_name,bus_width(bit),bit))
-            elif(fld_type in w0c_list):
+            if(fld_type in w0c_list):
                 fo.write("assign %s_%s_clr = %s_wr;\n"%(fld_name,fld_type.lower(),reg_name.lower()))
                 fo.write("assign %s_%s_clr_val%s =%s%s & pwdata%s;\n"%(fld_name,fld_type.lower(),bus_width(bit),fld_name,bus_width(bit),bit))
-            elif(fld_type in w1s_list):
+            if(fld_type in w1s_list):
                 fo.write("assign %s_%s_set = %s_wr;\n"%(fld_name,fld_type.lower(),reg_name.lower()))
                 fo.write("assign %s_%s_set_val%s =%s%s | pwdata%s;\n"%(fld_name,fld_type.lower(),bus_width(bit),fld_name,bus_width(bit),bit))
-            elif(fld_type in w0s_list):
+            if(fld_type in w0s_list):
                 fo.write("assign %s_%s_set = %s_wr;\n"%(fld_name,fld_type.lower(),reg_name.lower()))
                 fo.write("assign %s_%s_set_val%s =%s%s |(~pwdata%s);\n"%(fld_name,fld_type.lower(),bus_width(bit),fld_name,bus_width(bit),bit))
-            elif(fld_type in w1t_list):
+            if(fld_type in w1t_list):
                 fo.write("assign %s_%s_tog = %s_wr;\n"%(fld_name,fld_type.lower(),reg_name.lower()))
                 fo.write("assign %s_%s_tog_val%s =%s%s ^ pwdata%s;\n"%(fld_name,fld_type.lower(),bus_width(bit),fld_name,bus_width(bit),bit))
-            elif(fld_type in w0t_list):
+            if(fld_type in w0t_list):
                 fo.write("assign %s_%s_tog = %s_wr;\n"%(fld_name,fld_type.lower(),reg_name.lower()))
                 fo.write("assign %s_%s_tog_val%s =%s%s ^(~pwdata%s);\n"%(fld_name,fld_type.lower(),bus_width(bit),fld_name,bus_width(bit),bit))
             
             if(fld_type in wc_list):
                 fo.write("assign %s_%s_clr = %s_wr;\n"%(fld_name,fld_type.lower(),reg_name.lower()))
                 fo.write("assign %s_%s_clr_val%s =%s'b0;\n"%(fld_name,fld_type.lower(),bus_width(bit),bit2width(bit)))
-            elif(fld_type in rc_list):
+            if(fld_type in rc_list):
                 fo.write("assign %s_%s_clr = %s_rd;\n"%(fld_name,fld_type.lower(),reg_name.lower()))
                 fo.write("assign %s_%s_clr_val%s =%s'b0;\n"%(fld_name,fld_type.lower(),bus_width(bit),bit2width(bit)))
-            elif(fld_type in ws_list):
+            if(fld_type in ws_list):
                 fo.write("assign %s_%s_set = %s_wr;\n"%(fld_name,fld_type.lower(),reg_name.lower()))
-                fo.write("assign %s_%s_set_val%s =%s'b1;\n"%(fld_name,fld_type.lower(),bus_width(bit),bit2width(bit)))
-            elif(fld_type in rs_list):
+                fo.write("assign %s_%s_set_val%s =%s'b%s;\n"%(fld_name,fld_type.lower(),bus_width(bit),bit2width(bit),pow(2,bit2width(bit))-1))
+            if(fld_type in rs_list):
                 fo.write("assign %s_%s_set = %s_rd;\n"%(fld_name,fld_type.lower(),reg_name.lower()))
-                fo.write("assign %s_%s_set_val%s =%s'b1;\n"%(fld_name,fld_type.lower(),bus_width(bit),bit2width(bit)))
+                fo.write("assign %s_%s_set_val%s =%s'b%s;\n"%(fld_name,fld_type.lower(),bus_width(bit),bit2width(bit),pow(2,bit2width(bit))-1))
 
 
 #######################20200722##########################
